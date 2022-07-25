@@ -1,0 +1,88 @@
+:root {
+  --hudbg: rgb(0, 0, 0, 0.5);  
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  border: 0px;
+  font-family: system-ui;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+#overlay {
+  position: absolute;
+  top: 0px;
+  height: 32px;
+  width: 100%;
+  color: white;
+  background-color: var(--hudbg);
+  font-size: 20px;
+  padding: 0px;
+}
+
+#Menu {
+  position: absolute;
+  top: 100px;
+  height: 60%;
+  width: 60%;
+  color: white;
+  background-color: var(--hudbg);;
+  padding: 0px;
+  text-align: center;
+  font-size: 15px;
+}
+
+#render {
+  position: absolute;
+  color: white;
+}
+
+#susay {
+  top: calc(100% - 34px);
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+/*
+.huditem {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 32px;
+  width: 32px;
+  padding: 0px;
+  margin: 0px;
+  display: inline-block;
+  font-size: 0px;
+}
+*/
+
+#crosshair {
+  position: absolute;
+  background-color: #00f201;
+  padding: 0px;
+  margin: 0px;
+  height: 2.5px;
+  width: 2.5px;
+  top: 50%;
+}
+
+#Console {
+  color: white;
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  background-color: var(--hudbg);;
+  height: 40px;
+  width: 100%;
+  font-size: 20px;
+  top: 96%;
+}
