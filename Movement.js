@@ -52,14 +52,12 @@ function Sprint() {
   camera.updateProjectionMatrix();
 }
 
+let mouseX, mouseY = 0;
 const scale = 1;
-const mouseX = 0;
-const mouseY = 0;
-
 function mouseMove(e) {
   if (!ENABLE_POINTER) return;
-  mouseX = - (e.clientX / renderer.domElement.clientWidth)*2+1;
-  mouseY = - (e.clientY / renderer.domElement.clientHeight)*2+1;
+  mouseX =- (e.clientX / renderer.domElement.clientWidth)*2+1;
+  mouseY =- (e.clientY / renderer.domElement.clientHeight)*2+1;
   camera.rotation.x = mouseY / scale;
   camera.rotation.y = mouseX / scale;
 }
