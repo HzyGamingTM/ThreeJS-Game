@@ -65,11 +65,11 @@ function onKeyDown(e) {
     case 74:
       BreakBlock();
       break;
-    case 85:
-      playerBody.position.set(-1, 5, -1);
-      break;
     case 77:
       Music.turi_ip.play();
+      break;
+    case 32:
+      Jump();
       break;
   }
 }

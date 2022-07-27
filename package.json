@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cannon": "^0.6.2",
     "node": "^17.7.2",
-    "three": "^0.142.0",
-    "typescript": "^4.6.4"
+    "three": "^0.142.0"
   }
 }

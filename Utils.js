@@ -32,3 +32,14 @@ function RayCastVWLen(position, dir, length) {
   }
   return r2;
 }
+
+const Mathf = {
+  clamp:
+    function clamp(num, min, max) { 
+      Math.min(Math.max(num, min), max) 
+    },
+  lerp:
+    function lerp (start, end, amt) {
+      return (1-amt)*start+amt*end;
+    }
+}

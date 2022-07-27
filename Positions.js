@@ -56,7 +56,7 @@ function InitObjects() {
   light.castShadow = true;
 
   // Helpers
-  const axesHelper = new THREE.AxesHelper( 5 );
+  const axesHelper = new THREE.AxesHelper(5);
   
   scene.add(axesHelper);
   scene.add(light);
@@ -73,6 +73,14 @@ function SyncBodyMesh() {
   floor.quaternion.copy(groundBody.quaternion);
   playerMesh.position.copy(playerBody.position);
   playerMesh.quaternion.copy(playerBody.quaternion);
+  camera.quaternion.copy(playerBody.quaternion);
+  playerBody.position.x = camera.position.x;
+  playerBody.position.z = camera.position.z;
+  camera.position.y = playerBody.position.y;
+}
+
+function SpawnPlayer() {
+  playerBody.position.y = 5;
 }
 
 let tempmesh, tempcube, ylevelbuff

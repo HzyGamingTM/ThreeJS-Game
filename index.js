@@ -26,6 +26,7 @@ function init() {
   ConsoleDisplay = document.getElementById("Console").style;
   OverlayElement = document.getElementById('overlay');
   InitObjects();
+  SpawnPlayer();
   ALLOW_MOVEMENT = true;
   ENABLE_HUD = false;
 }

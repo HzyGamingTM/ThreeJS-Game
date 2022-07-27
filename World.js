@@ -7,7 +7,6 @@ function UpdateBlock() {
 }
 
 function BreakBlock() {
-  console.log(block[0].distance);
   if (block[0].distance <= range) {
     block[0].object.material.dispose();
     block[0].object.geometry.dispose();
