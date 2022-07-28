@@ -1,5 +1,5 @@
-let ALLOW_MOVEMENT, ALLOW_FLYING;
-let SPRINTING = false
+let ALLOW_MOVEMENT;
+let SPRINTING = false;
 let ENABLE_POINTER = false;
 
 function onKeyUp(e) {
@@ -19,12 +19,6 @@ function onKeyUp(e) {
       break;
     case 16:
       SPRINTING = false;
-      break;
-    case 69:
-      FlyUp = false;
-      break;
-    case 81:
-      FlyDown = false;
       break;
   }  
 }
@@ -52,12 +46,6 @@ function onKeyDown(e) {
       break;
     case 82:
       RegenTerrain();
-      break;
-    case 69:
-      FlyUp = true;
-      break;
-    case 81:
-      FlyDown = true;
       break;
     case 72:
       ENABLE_HUD = !ENABLE_HUD;

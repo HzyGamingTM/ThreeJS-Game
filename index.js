@@ -27,10 +27,12 @@ function init() {
   OverlayElement = document.getElementById('overlay');
   InitObjects();
   SpawnPlayer();
+  Music.init();
   ALLOW_MOVEMENT = true;
   ENABLE_HUD = false;
 }
 
+const render = () => { renderer.render(scene, camera) }
 async function animate() {
   render();
   requestAnimationFrame(animate);
@@ -39,10 +41,6 @@ async function animate() {
   Move(), SyncBodyMesh();
   Sprint(), UpdateBlock();
   RenderMenu(), UpdateCords();
-}
-
-const render = () => { 
-  renderer.render(scene, camera) 
 }
 
 function UpdateCords() {

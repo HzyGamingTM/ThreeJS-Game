@@ -1,5 +1,8 @@
-const Music = { 
-  turi_ip: new Audio("Resource/Turi.mp3"),
-};
+let turi_ip;
 
-const MUSIC_LIST = [Music.turi_ip];
+const Music = {
+  init:
+    function Music() {
+      turi_ip = new Audio("Resource/Turi.mp3");
+    },
+};

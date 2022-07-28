@@ -2,8 +2,8 @@ let block;
 const range = 2;
 
 function UpdateBlock() {
-  if (RayCastFromCamera() == null) return;
-  block = RayCastFromCamera();
+  if (Raycast.camera() == null) return;
+  block = Raycast.camera();
 }
 
 function BreakBlock() {

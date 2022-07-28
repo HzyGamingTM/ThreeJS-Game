@@ -1,14 +1,14 @@
 let img_material, physicsMaterial;
 let groundBody, world;
 let playerMesh, playerBody;
+let testMesh, testBody, testObj;
 
-// WARNING: Cannonjs is Z Up!
-
+// DOCS: https://pmndrs.github.io/cannon-es/docs/index.html
 function InitObjects() {
   // World
   world = new CANNON.World();
   world.gravity.set(0, -9.82, 0);
-  // DOCS: https://pmndrs.github.io/cannon-es/docs/index.html
+  
   // Camera
   camera = new THREE.PerspectiveCamera(MIN_FOV,
     window.innerWidth/window.innerHeight, 0.1, 10000
@@ -41,7 +41,6 @@ function InitObjects() {
   
   // Mesh
   floorGeometry = new THREE.PlaneGeometry(100, 100);
-  // floorGeometry.rotateX(-Math.PI / 2);
   floor = new THREE.Mesh(floorGeometry, material);
   
   groundBody = new CANNON.Body({
@@ -50,6 +49,18 @@ function InitObjects() {
   });
   groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
   groundBody.position.set(0, -0.5, 0);
+
+  const testGeo = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
+  testObj = new THREE.Mesh(testGeo, playerMaterial);
+  testObj.rotateX(-Math.PI / 2);
+  
+  testBody = new CANNON.Body({
+    shape: new CANNON.Cylinder(0.5/2, 0.5/2, 2/2, 32/2),
+    mass: 1,
+  });
+  // testBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
+  testBody.position.set(3, 3, 3);
+  
   
   // Light
   const light = new THREE.AmbientLight(0xffffff, 0.5);
@@ -63,6 +74,8 @@ function InitObjects() {
   scene.add(camera);
   scene.add(floor);
   scene.add(playerMesh);
+  scene.add(testObj);
+  world.add(testBody);
   world.addBody(groundBody);
   world.addBody(playerBody);
   TerrainGeneration();
@@ -77,6 +90,8 @@ function SyncBodyMesh() {
   playerBody.position.x = camera.position.x;
   playerBody.position.z = camera.position.z;
   camera.position.y = playerBody.position.y;
+  testObj.position.copy(testBody.position);
+  testObj.quaternion.copy(testBody.quaternion);
 }
 
 function SpawnPlayer() {

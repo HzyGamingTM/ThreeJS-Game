@@ -1,12 +1,11 @@
 let Forward, Backward, Left, Right, FlyUp, FlyDown = false;
 let speed;
+let ALLOW_FLY = false;
 
 const SPEED = {
   walk: 3, rotate: 3,
   flight: 3, sprint: 6
 };
-
-const jumpVel = 5;
 
 const MAX_FOV = 110.0;
 const MIN_FOV = 90.0;
@@ -15,22 +14,17 @@ let angleX = 0;
 let angleY = 0;
 
 function Move() {
+  playerBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), angleX);
   if (Right) {
-    angleX -= 3 * Time.deltaTime;
-    playerBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), angleX);
     if (ENABLE_POINTER) camera.translateX(speed * Time.deltaTime);
-    //else camera.rotation.y -= SPEED.rotate * Time.deltaTime;
+    else angleX -= 3 * Time.deltaTime; 
   }
   if (Left) {
-    angleX += 3 * Time.deltaTime;
-    playerBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), angleX);
     if (ENABLE_POINTER) camera.translateX(-speed * Time.deltaTime);
-    //else camera.rotation.y += SPEED.rotate * Time.deltaTime;
+    else angleX += 3 * Time.deltaTime;
   }
   if (Backward) camera.translateZ(-speed * Time.deltaTime);
   if (Forward) camera.translateZ(speed * Time.deltaTime);
-  if (FlyUp) camera.translateY(SPEED.flight * Time.deltaTime);
-  if (FlyDown) camera.translateY(-SPEED.flight * Time.deltaTime);
 }
 
 function SprintFov() {
@@ -52,6 +46,16 @@ function Sprint() {
   WalkFov();
 }
 
+const jumpCheck = 0.5;
+function GroundCheck() {
+  let obj = Raycast.vector(camera.position,
+    new THREE.Vector3(0, -1, 0)
+  );
+  console.log(obj[0].distance)
+  if (obj[0].distance <= jumpCheck) return true;
+  else return false;
+}
+
 const scale = 1;
 let mouseX, mouseY = 0;
 function mouseMove(e) {
@@ -63,5 +67,5 @@ function mouseMove(e) {
 }
 
 function Jump() {
-  playerBody.velocity.set(0, 5, 0);
+  if (GroundCheck()) playerBody.velocity.set(0, 4, 0);
 }
