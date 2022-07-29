@@ -10,9 +10,7 @@ const SPEED = {
 const MAX_FOV = 110.0;
 const MIN_FOV = 90.0;
 
-let angleX = 0; 
-let angleY = 0;
-
+let angleX = 0;
 function Move() {
   playerBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), angleX);
   if (Right) {
@@ -51,9 +49,8 @@ function GroundCheck() {
   let obj = Raycast.vector(camera.position,
     new THREE.Vector3(0, -1, 0)
   );
-  console.log(obj[0].distance)
   if (obj[0].distance <= jumpCheck) return true;
-  else return false;
+  return false;
 }
 
 const scale = 1;
@@ -67,5 +64,8 @@ function mouseMove(e) {
 }
 
 function Jump() {
-  if (GroundCheck()) playerBody.velocity.set(0, 4, 0);
+  if (ALLOW_FLY) {
+    playerBody.velocity.set(0, 4, 0);
+  } else if (GroundCheck())
+    playerBody.velocity.set(0, 4, 0);
 }

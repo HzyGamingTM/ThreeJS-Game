@@ -54,6 +54,16 @@ body {
   text-align: center;
 }
 
+#crosshair {
+  position: absolute;
+  background-color: #00f201;
+  padding: 0px;
+  margin: 0px;
+  height: 2.5px;
+  width: 2.5px;
+  top: 50%;
+}
+
 /*
 .huditem {
   background-color: rgba(0, 0, 0, 0.5);
@@ -65,17 +75,7 @@ body {
   font-size: 0px;
 }
 */
-
-#crosshair {
-  position: absolute;
-  background-color: #00f201;
-  padding: 0px;
-  margin: 0px;
-  height: 2.5px;
-  width: 2.5px;
-  top: 50%;
-}
-
+/*
 #Console {
   color: white;
   position: absolute;
@@ -87,3 +87,4 @@ body {
   font-size: 20px;
   top: 96%;
 }
+*/

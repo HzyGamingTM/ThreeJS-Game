@@ -1,7 +1,6 @@
 const Clock = new THREE.Clock();
 let camera, scene, renderer;
-let ENABLE_HUD, MenuDisplay, OverlayDisplay, ConsoleDisplay;
-
+let ENABLE_HUD, MenuDisplay, OverlayDisplay;
 let Time = { deltaTime: 0 };
 
 function init() {
@@ -22,8 +21,7 @@ function init() {
     onKeyUp(event)
   }, false);
   document.addEventListener("mousemove", mouseMove, false);
-  MenuDisplay = document.getElementById("Menu").style;
-  ConsoleDisplay = document.getElementById("Console").style;
+  MenuDisplay = document.getElementById("Menu").style
   OverlayElement = document.getElementById('overlay');
   InitObjects();
   SpawnPlayer();
@@ -52,13 +50,8 @@ function UpdateCords() {
 }
 
 function RenderMenu() {
-  if (!ENABLE_HUD) {
-    MenuDisplay.display = "none";
-    ConsoleDisplay.display = "none";
-  } else {
-    MenuDisplay.display = "";
-    ConsoleDisplay.display = "";
-  }
+  if (!ENABLE_HUD) MenuDisplay.display = "none";
+  else MenuDisplay.display = "";
 }
 
 init(), animate();

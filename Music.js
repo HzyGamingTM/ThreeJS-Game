@@ -1,8 +1,7 @@
-let turi_ip;
-
+let TURI_IP;
 const Music = {
   init:
     function Music() {
-      turi_ip = new Audio("Resource/Turi.mp3");
-    },
+      TURI_IP = new Audio("Resource/Turi.mp3");
+    }
 };

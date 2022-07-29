@@ -8,13 +8,11 @@ function InitObjects() {
   // World
   world = new CANNON.World();
   world.gravity.set(0, -9.82, 0);
-  
   // Camera
   camera = new THREE.PerspectiveCamera(MIN_FOV,
     window.innerWidth/window.innerHeight, 0.1, 10000
   );
   camera.position.z = 5;
-  
   // Player
   const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
   const playerMaterial = new THREE.MeshStandardMaterial();
@@ -24,8 +22,7 @@ function InitObjects() {
     mass: 1,
     shape: new CANNON.Box(new CANNON.Vec3(1/2, 1/2, 1/2))
   });
-  playerBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0)
-  playerBody.position.set(2, 5, 2);
+  playerBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
   
   // Texture
   const img_texture = new THREE.TextureLoader().load("Resource/dirt.png");
@@ -33,8 +30,6 @@ function InitObjects() {
   // Material
   material = new THREE.MeshStandardMaterial();
   material.color.set(0x00c5cc);
-  material.transparent = true;
-  material.opacity = 0.7;
   img_material = new THREE.MeshLambertMaterial({
     map: img_texture
   });
@@ -60,7 +55,6 @@ function InitObjects() {
   });
   // testBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
   testBody.position.set(3, 3, 3);
-  
   
   // Light
   const light = new THREE.AmbientLight(0xffffff, 0.5);
@@ -98,28 +92,39 @@ function SpawnPlayer() {
   playerBody.position.y = 5;
 }
 
-let tempmesh, tempcube, ylevelbuff
+let tempCubeRB, ylevelbuff;
 let mesh_array = [];
+let rb_array = [];
 function TerrainGeneration() {
   let cube = new THREE.BoxGeometry(1, 1, 1);
-  tempmesh, tempcube = "";
-  for (let i = 0; i < 10; i++) {
-    tempcube = new THREE.BoxGeometry(1,1,1);
-    tempmesh = new THREE.Mesh(cube, img_material);
+  let halfExt = new CANNON.Vec3(0.5, 0.5, 0.5);
+  for (i = 0; i < 10; i++) {
+    let tempmesh = new THREE.Mesh(cube, img_material);
     mesh_array.push(tempmesh);
     scene.add(tempmesh);
-    tempmesh, tempcube = "";
+    tempCubeRB = new CANNON.Body({
+      shape: new CANNON.Box(halfExt),
+      type: CANNON.Body.STATIC
+    });
+    tempCubeRB.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
+    rb_array.push(tempCubeRB);
+    world.add(tempCubeRB);
   }
-  for (let i = 0; i < 10; i++) {
+  for (i = 0; i < 10; i++) {
+    let randomY = Math.floor(Math.random() * 2);
     mesh_array[i].position.x = i;
-    mesh_array[i].position.y += Math.floor(Math.random() * 2);
+    mesh_array[i].position.y += randomY;
+    rb_array[i].position.x = i;
+    rb_array[i].position.y += randomY;
   }
 }
 function RegenTerrain() {
   ylevelbuff = 0;
-  for (let i = 0; i < 10; i++) {
+  for (i = 0; i < 10; i++) {
     mesh_array[i].position.x = i;
+    rb_array[i].position.x = i;
     ylevelbuff += Math.floor(Math.random() * 2);
     mesh_array[i].position.y = ylevelbuff;
+    rb_array[i].position.y = ylevelbuff;
   }
 }

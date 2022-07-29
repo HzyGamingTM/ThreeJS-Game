@@ -54,7 +54,7 @@ function onKeyDown(e) {
       BreakBlock();
       break;
     case 77:
-      Music.turi_ip.play();
+      TURI_IP.play();
       break;
     case 32:
       Jump();
