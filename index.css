@@ -6,7 +6,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-
 body {
   cursor: none;
   width: 100%;
@@ -64,8 +63,7 @@ body {
   top: 50%;
 }
 
-/*
-.huditem {
+/*.huditem {
   background-color: rgba(0, 0, 0, 0.5);
   height: 32px;
   width: 32px;
@@ -73,9 +71,7 @@ body {
   margin: 0px;
   display: inline-block;
   font-size: 0px;
-}
-*/
-/*
+}*//*
 #Console {
   color: white;
   position: absolute;
@@ -86,5 +82,4 @@ body {
   width: 100%;
   font-size: 20px;
   top: 96%;
-}
-*/
+}*/

@@ -13,7 +13,3 @@ function BreakBlock() {
     scene.remove(block[0].object);
   }
 }
-
-function PlaceBlock() {
-  
-}

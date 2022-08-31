@@ -1,28 +1,11 @@
 const Clock = new THREE.Clock();
-let camera, scene, renderer;
+let Time = {deltaTime:0};
 let ENABLE_HUD, MenuDisplay, OverlayDisplay;
-let Time = { deltaTime: 0 };
 
 function init() {
-  console.clear();
-  scene = new THREE.Scene();
-  // Color Format in 0xRRGGBB
-  scene.background = new THREE.Color(0x33D5FF);
-  renderer = new THREE.WebGLRenderer({
-    antialias: true,
-    powerPreference: "high-performance"
-  });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
-  document.addEventListener('keydown', () => {
-    onKeyDown(event)
-  }, false);
-  document.addEventListener('keyup', () => {
-    onKeyUp(event)
-  }, false);
-  document.addEventListener("mousemove", mouseMove, false);
-  MenuDisplay = document.getElementById("Menu").style
+  MenuDisplay = document.getElementById("Menu").style;
   OverlayElement = document.getElementById('overlay');
+  RegisterEvents();
   InitObjects();
   SpawnPlayer();
   Music.init();
@@ -30,28 +13,31 @@ function init() {
   ENABLE_HUD = false;
 }
 
-const render = () => { renderer.render(scene, camera) }
+function RegisterEvents() {
+  document.addEventListener('keydown',()=>onKeyDown(event), false);
+  document.addEventListener('keyup',()=>onKeyUp(event), false);
+  document.addEventListener("mousemove", mouseMove, false);
+}
+
+const render = () => renderer.render(scene, camera);
 async function animate() {
   render();
   requestAnimationFrame(animate);
   Time.deltaTime = Clock.getDelta();
-  world.step(1 / 60);
+  world.step(1/60);
   Move(), SyncBodyMesh();
   Sprint(), UpdateBlock();
   RenderMenu(), UpdateCords();
 }
-
 function UpdateCords() {
   OverlayElement.innerHTML = `XYZ: 
   ${camera.position.x.toFixed(1)},
   ${camera.position.y.toFixed(1)},
   ${camera.position.z.toFixed(1)},
-  Debug: ${Debug.log}`;
+  Debug: ${Debug.log}`
 }
-
 function RenderMenu() {
   if (!ENABLE_HUD) MenuDisplay.display = "none";
   else MenuDisplay.display = "";
 }
-
 init(), animate();
